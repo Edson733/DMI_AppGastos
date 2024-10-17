@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../services/validations.dart';
+import '../widgets/custom_input.dart';
 
 class RecoverPassView extends StatefulWidget {
   const RecoverPassView({super.key});
@@ -27,45 +28,41 @@ class _RecoverPassViewState extends State<RecoverPassView> {
         child: Padding(
           padding: const EdgeInsets.all(16.0),
           child: Form(
-              key: _formKey,
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Image.asset('hucha_blanca.png', width: 200, height: 200),
-                  const SizedBox(height: 16),
-                  TextFormField(
-                    controller: _emailController,
-                    decoration: const InputDecoration(
-                        hintText: 'Correo Electrónico',
-                        label: Text('Correo Electrónico'),
-                        hintStyle:
-                            TextStyle(fontSize: 16, color: Colors.white38)),
-                    style: const TextStyle(color: Colors.white),
-                    keyboardType: TextInputType.emailAddress,
-                    validator: Validations.validateEmail,
-                  ),
-                  const SizedBox(height: 48),
-                  SizedBox(
-                    height: 48,
-                    width: double.infinity,
-                    child: ElevatedButton(
-                      onPressed: () {
-                        if (_formKey.currentState!.validate()) {
-                          print('Datos: ${_emailController.text}');
-                          Navigator.pushNamed(context, '/verification-code');
-                        }
-                      },
-                      style: ElevatedButton.styleFrom(
-                          backgroundColor: Colors.white,
-                          foregroundColor: Colors.black,
-                          shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(16))),
-                      child: const Text('Enviar código',
-                          style: TextStyle(fontSize: 16)),
+            key: _formKey,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Image.asset('hucha_blanca.png', width: 200, height: 200),
+                const SizedBox(height: 16),
+                CustomInput(
+                  controller: _emailController, 
+                  hintText: 'Correo Electrónico', 
+                  labelText: 'Correo Electrónico',
+                  keyboardType: TextInputType.emailAddress,
+                  validator: Validations.validateEmail,
+                ),
+                const SizedBox(height: 48),
+                SizedBox(
+                  height: 48,
+                  width: double.infinity,
+                  child: ElevatedButton(
+                    onPressed: () {
+                      if (_formKey.currentState!.validate()) {
+                        print('Datos: ${_emailController.text}');
+                        Navigator.pushNamed(context, '/verification-code');
+                      }
+                    },
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: Colors.white,
+                      foregroundColor: Colors.black,
+                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16))
                     ),
+                    child: const Text('Enviar código', style: TextStyle(fontSize: 16)),
                   ),
-                ],
-              )),
+                ),
+              ],
+            )
+          ),
         ),
       ),
     );

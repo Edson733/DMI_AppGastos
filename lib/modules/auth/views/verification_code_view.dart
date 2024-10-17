@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../services/validations.dart';
+import '../widgets/custom_input.dart';
 
 class VerificationCodeView extends StatefulWidget {
   const VerificationCodeView({super.key});
@@ -33,14 +34,10 @@ class _VerificationCodeViewState extends State<VerificationCodeView> {
               children: [
                 Image.asset('hucha_blanca.png', width: 200, height: 200),
                 const SizedBox(height: 16),
-                TextFormField(
-                  controller: _codeController,
-                  decoration: const InputDecoration(
-                    hintText: 'Código de Verficación',
-                    label: Text('Código de Verficación'),
-                    hintStyle: TextStyle(fontSize: 16, color: Colors.white38)
-                  ),
-                  style: const TextStyle(color: Colors.white),
+                CustomInput(
+                  controller: _codeController, 
+                  hintText: 'Código de Verficación', 
+                  labelText: 'Código de Verficación',
                   keyboardType: TextInputType.number,
                   validator: Validations.validateVerificationCode,
                 ),
